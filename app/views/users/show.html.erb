@@ -1,0 +1,10 @@
+<h3>User</h3>
+<p>User: <%= @user.name %></p>
+<p>Email: <%= @user.email if @user.email %></p>
+<p>Address: <%= @user.address %></p>
+<p>City: <%= @user.city %></p>
+<p>State: <%= @user.state %></p>
+<p>Zip: <%= @user.zip %></p>
+<p>Latitude <%= @user.latitude %></p>
+<p>Longitude <%= @user.longitude %></p>
+<%= link_to 'Edit account', edit_user_path %>

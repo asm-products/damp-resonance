@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: zipifieds
+  api_key: '175786364631841'
+  api_secret: 8UWYx5NxWu9NLc4zSNn1ahOUnmU
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: zipifieds
+  api_key: '175786364631841'
+  api_secret: 8UWYx5NxWu9NLc4zSNn1ahOUnmU
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: zipifieds
+  api_key: '175786364631841'
+  api_secret: 8UWYx5NxWu9NLc4zSNn1ahOUnmU
+  enhance_image_tag: true
+  static_image_support: false
