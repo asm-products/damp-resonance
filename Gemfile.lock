@@ -71,6 +71,8 @@ GEM
       thor (~> 0.19.1)
     geocoder (1.2.0)
     gmaps4rails (2.1.2)
+    haml (4.1.0.beta.1)
+      tilt
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (2.0.7)
@@ -92,8 +94,8 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.3)
     multi_json (1.9.3)
-    mysql2 (0.3.15)
     orm_adapter (0.5.0)
+    pg (0.17.1)
     polyglot (0.3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -185,10 +187,11 @@ DEPENDENCIES
   foreman
   geocoder (~> 1.2.0)
   gmaps4rails
+  haml
   jbuilder (~> 2.0)
   jquery-rails
   mailboxer
-  mysql2
+  pg
   quiet_assets
   rails (= 4.1.0)
   rails_layout

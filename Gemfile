@@ -11,7 +11,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
-gem 'mysql2'
+#gem 'mysql2'
+gem 'pg'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
@@ -21,6 +22,8 @@ gem 'gmaps4rails'
 gem 'cloudinary'
 gem 'carrierwave'
 gem 'mailboxer'
+#gem 'discuss'
+gem 'haml'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
