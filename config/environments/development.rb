@@ -39,7 +39,7 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"]
    }
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'normanmoore.mooo.com:5000' }
+  config.action_mailer.default_url_options = { :host => 'www.zipifieds.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
