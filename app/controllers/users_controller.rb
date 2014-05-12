@@ -9,4 +9,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def ad_params
+    params[:user].permit!
+  end
 end
