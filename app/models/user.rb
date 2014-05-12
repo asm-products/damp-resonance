@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  geocoded_by :address
+  geocoded_by :full_address
   after_validation :geocode, :if => :address_changed?
 
   def self.find_for_facebook_oauth(auth)
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     user.provider = auth.provider
     user.uid = auth.uid
     user.email = auth.info.email
-    user.address = auth.info.location
+    user.address = auth.info.location.split(",")[0]
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name   # assuming the user model has a name
   end
@@ -31,7 +31,11 @@ end
   def display_name
     return "#{name}"
   end
-  
+
+  def full_address
+    [address, city, state, zip].compact.join(', ')
+  end  
+
   def mailboxer_email(object)
     return "{email}"
   end
