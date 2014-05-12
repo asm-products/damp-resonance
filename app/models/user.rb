@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     user.provider = auth.provider
     user.uid = auth.uid
     user.email = auth.info.email
-    user.address = auth.info.location.split(",")[0]
+    user.address = auth.info.location
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name   # assuming the user model has a name
   end
