@@ -6,14 +6,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  geocoded_by :full_address
-  after_validation :geocode, :if => :zip_changed?
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
 
   def self.find_for_facebook_oauth(auth)
   where(auth.slice(:provider, :uid)).first_or_create do |user|
     user.provider = auth.provider
     user.uid = auth.uid
     user.email = auth.info.email
+    user.address = auth.info.location
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name   # assuming the user model has a name
   end
@@ -25,10 +26,6 @@ end
         user.email = data["email"] if user.email.blank?
       end
     end
-  end
-
-  def full_address
-    [address, city, state, zip].compact.join(', ')
   end
 
   def display_name
