@@ -1,8 +1,7 @@
-<h1>Listing ads</h1>
+<h1>Search Ads</h1>
 <%= form_tag ads_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Distance", :name => nil %>
+  <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
+    <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
 

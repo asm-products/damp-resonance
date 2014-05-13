@@ -26,6 +26,7 @@ gem 'omniauth-facebook'
 #gem 'discuss'
 gem 'haml'
 gem 'rails_12factor'
+gem 'pg_search'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

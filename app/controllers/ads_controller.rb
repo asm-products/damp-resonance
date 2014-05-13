@@ -4,10 +4,11 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    if params[:search].present?
-      @ads = Ad.near(current_user, params[:search], :order => "distance")
+    if params[:keywords].present?
+      #@ads = Ad.where(["description LIKE :tag", {:tag => params[:keywords]}]).near(current_user, 100000, :order => "distance")
+      @ads = Ad.match(:description => params[:keywords]).near(current_user, 100000, :order => "distance")
     else
-      @ads = Ad.near(current_user, 25, :order => "distance")
+      @ads = Ad.near(current_user, 100000, :order => "distance")
     end
   end
 
