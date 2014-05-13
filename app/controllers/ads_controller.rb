@@ -6,7 +6,8 @@ class AdsController < ApplicationController
   def index
     if params[:keywords].present?
       #@ads = Ad.where(["description LIKE :tag", {:tag => params[:keywords]}]).near(current_user, 100000, :order => "distance")
-      @ads = Ad.match(:description => params[:keywords]).near(current_user, 100000, :order => "distance")
+      #@ads = PgSearch.multisearch(params[:keywords]).near(current_user, 100000, :order => "distance")
+      @ads = Ad.search_ad(params[:keywords]).near(current_user, 100000, :order => "distance")
     else
       @ads = Ad.near(current_user, 100000, :order => "distance")
     end
