@@ -19,8 +19,12 @@
         <td><%= link_to ad.title, ad %> Listed -  <%= ad.created_at.to_date %>
         <td>Distance - <%= ad.distance.round(2) %> Miles</td>
         <td><%= link_to 'Show', ad %></td>
+        <% if can? :update, ad %>
         <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-        <td><%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% if can? :destroy, ad %>
+        <td><%= link_to 'Delete', ad %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
