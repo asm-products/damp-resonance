@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     user.address = auth.info.location
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name   # assuming the user model has a name
+    user.url = auth.extra.raw_info.link
   end
 end
 
