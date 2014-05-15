@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource except: [:create]
   before_action :set_ad, only: [:show, :edit, :update, :destroy]
 
   # GET /ads
@@ -8,9 +8,17 @@ class AdsController < ApplicationController
     if params[:keywords].present?
       #@ads = Ad.where(["description LIKE :tag", {:tag => params[:keywords]}]).near(current_user, 100000, :order => "distance")
       #@ads = PgSearch.multisearch(params[:keywords]).near(current_user, 100000, :order => "distance")
-      @ads = Ad.search_ad(params[:keywords]).near(current_user, 100000, :order => "distance")
-    else
-      @ads = Ad.near(current_user, 100000, :order => "distance")
+      if params[:my_ads].present?
+        @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000)
+      else
+        @ads = Ad.search_ad(params[:keywords]).near(current_user, 100000, :order => "distance")
+      end
+     else
+      if params[:my_ads].present?
+        @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000)
+      else        
+        @ads = Ad.near(current_user, 100000, :order => "distance")
+      end
     end
   end
 

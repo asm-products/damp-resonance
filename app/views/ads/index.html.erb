@@ -1,7 +1,9 @@
 <h1>Search Ads</h1>
 <%= form_tag ads_path, :method => :get do %>
   <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
-    <%= submit_tag "Search", :name => nil %>
+  <p><%= check_box_tag(:my_ads) %>
+  <%= label_tag(:my_ads, "Show Only My Ads") %>
+  <p><%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
 
