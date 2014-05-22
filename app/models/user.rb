@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   geocoded_by :full_address
-  after_validation :geocode, :if => :address_changed?
+  reverse_geocoded_by :latitude, :longitude, :address => :full_address
+  after_validation :geocode, :reverse_geocode :if => :address_changed?
 
   def self.find_for_facebook_oauth(auth)
   where(auth.slice(:provider, :uid)).first_or_create do |user|

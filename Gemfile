@@ -41,3 +41,4 @@ end
 
 gem "omniauth"
 gem "omniauth-facebook"
+
