@@ -3,7 +3,6 @@
 
 <%= link_to 'Back', ads_path %>
 <p>Title: <%= @ad.title %></p> 
-<p><%= link_to "Facebook Profile", @ad.user.url, :target => "_blank", data: { confirm: "Are you sure?" } %>
 <p>Description: <%= simple_format(@ad.description) %></p>
 <p><% unless @ad.pic_url.nil? %><%= image_tag @ad.pic_url %><br /><% end %>
 <p><% unless @ad.pic2_url.nil? %><%= image_tag @ad.pic2_url %><br /><% end %>

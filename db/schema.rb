@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515102725) do
+ActiveRecord::Schema.define(version: 20140520004857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,10 +34,25 @@ ActiveRecord::Schema.define(version: 20140515102725) do
 
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
 
+  create_table "authentication_providers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers", using: :btree
+
   create_table "conversations", force: true do |t|
     t.string   "subject",    default: ""
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "facebook_oauth_settings", force: true do |t|
+    t.string   "access_token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notifications", force: true do |t|
@@ -82,6 +97,20 @@ ActiveRecord::Schema.define(version: 20140515102725) do
 
   add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
 
+  create_table "user_authentications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "authentication_provider_id"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "token_expires_at"
+    t.text     "params"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "user_authentications", ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id", using: :btree
+  add_index "user_authentications", ["user_id"], name: "index_user_authentications_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -106,6 +135,8 @@ ActiveRecord::Schema.define(version: 20140515102725) do
     t.string   "uid"
     t.string   "role"
     t.string   "url"
+    t.string   "phonenumber"
+    t.string   "facebook_uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

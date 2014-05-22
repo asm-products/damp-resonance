@@ -4,11 +4,10 @@ Zipifieds::Application.routes.draw do
   get 'conversations/index'
 
   root :to => "home#index"
-  #devise_for :users, :controllers => {:registrations => "registrations"}
-  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :users, :ads
-   
-  resources :conversations 
-  resources :messages
-   
+  devise_for :users, controllers: { registrations: "registrations" }
+  resources :users, :ads, :conversations, :messages, :facebook
+ 
+  get "/callback" => "facebook#callback"
+  get "/facebook_profile" => "facebook#facebook_profile"
+
 end

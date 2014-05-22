@@ -11,6 +11,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 #gem 'mysql2'
 gem 'pg'
 gem 'simple_form'
@@ -22,12 +24,13 @@ gem 'gmaps4rails'
 gem 'cloudinary'
 gem 'carrierwave'
 gem 'mailboxer'
-gem 'omniauth-facebook'
+gem 'koala'
 #gem 'discuss'
 gem 'haml'
 gem 'rails_12factor'
 gem 'pg_search'
 gem 'cancan'
+gem 'domp'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -35,3 +38,6 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
 end
+
+gem "omniauth"
+gem "omniauth-facebook"
