@@ -1,7 +1,7 @@
 class Ad < ActiveRecord::Base
   belongs_to :user
-  geocoded_by :full_address
-  after_validation :geocode, :if => :address_changed?
+  geocoded_by :zip
+  after_validation :geocode, :if => :zip_changed?
   mount_uploader :pic, PicUploader
   mount_uploader :pic2, Pic2Uploader
   include PgSearch

@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  geocoded_by :full_address
-  reverse_geocoded_by :latitude, :longitude, :address => :full_address
+  geocoded_by :zip
+  reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, :reverse_geocode
 
   def self.find_for_facebook_oauth(auth)
