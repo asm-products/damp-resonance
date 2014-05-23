@@ -4,7 +4,7 @@
 <%= link_to 'Back', ads_path %>
 <p>Title: <%= @ad.title %></p> 
 <p>Description: <%= simple_format(@ad.description) %></p>
-<p>Facebook Page: <% = link_to "Facebook", "#{@user.facebook_link}" %></p>
+<p>Facebook Page: <% = link_to "Facebook", "http://www.facebook.com/#{@ad.user.uid}" %></p>
 <p><% unless @ad.pic_url.nil? %><%= image_tag @ad.pic_url %><br /><% end %>
 <p><% unless @ad.pic2_url.nil? %><%= image_tag @ad.pic2_url %><br /><% end %>
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=225x150&sensor=false&zoom=10&markers=#{@ad.latitude}%2c#{@ad.longitude}" %>
