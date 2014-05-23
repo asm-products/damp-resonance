@@ -23,9 +23,6 @@
       <label><%= f.check_box :remove_pic2 %>Remove Pic2</label>
     </div>
   </div>
-   <%= f.hidden_field :address, :value => current_user.address %>
-   <%= f.hidden_field :city, :value => current_user.city %>
-   <%= f.hidden_field :state, :value => current_user.state %>
    <%= f.hidden_field :zip, :value => current_user.zip %>
   <div class="form-actions">
     <%= f.button :submit %>

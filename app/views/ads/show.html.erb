@@ -3,6 +3,7 @@
 
 <%= link_to 'Back', ads_path %>
 <p>Title: <%= @ad.title %></p> 
+<p><%= @ad.user.url %></p>
 <p>Description: <%= simple_format(@ad.description) %></p>
 <p>Facebook Page: <% = link_to "Facebook", @ad.user.url %></p>
 <p><% unless @ad.pic_url.nil? %><%= image_tag @ad.pic_url %><br /><% end %>
