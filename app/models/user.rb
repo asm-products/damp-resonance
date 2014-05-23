@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     user.uid = auth.uid
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
-    user.facebook_link = auth.info.link   
+    user.facebook_url = auth.info.link   
   end
 end  
 
