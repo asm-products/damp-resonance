@@ -1,8 +1,10 @@
 <h1>Search Ads</h1>
 <%= form_tag ads_path, :method => :get do %>
   <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
+  <% if current_user %>
   <p><%= check_box_tag(:my_ads) %>
   <%= label_tag(:my_ads, "Show Only My Ads") %>
+  <% end %>
   <p><%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
@@ -15,21 +17,18 @@
   </thead>
 
   <tbody>
-    <% @ads.each do |ad| %>
+<%= paginate @ads %>
+<% @ads.each do |ad| %>
       <tr>
         <td><%= image_tag ad.pic_url(:thumb) %></td>
         <td><%= link_to ad.title, ad %> Listed -  <%= ad.created_at.to_date %>
         <td>Distance - <%= ad.distance.round(2) %> Miles</td>
         <td><%= link_to 'Show', ad %></td>
-        <% if can? :update, ad %>
         <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-        <% end %>
-        <% if can? :destroy, ad %>
         <td><%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
       </tr>
     <% end %>
-  </tbody>
+</tbody>
 </table>
 
 <br>

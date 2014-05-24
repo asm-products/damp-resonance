@@ -31,6 +31,8 @@ gem 'rails_12factor'
 gem 'pg_search'
 gem 'cancan'
 gem 'domp'
+gem 'money-rails'
+gem 'kaminari'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

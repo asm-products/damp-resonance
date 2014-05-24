@@ -1,4 +1,6 @@
 Zipifieds::Application.routes.draw do
+  resources :categories
+
   get 'messages/index'
 
   get 'conversations/index'

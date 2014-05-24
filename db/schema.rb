@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520004857) do
+ActiveRecord::Schema.define(version: 20140524043451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20140520004857) do
     t.string   "zip"
     t.string   "pic"
     t.string   "pic2"
+    t.string   "pic3"
+    t.integer  "category_id"
+    t.integer  "price_cents"
   end
 
   add_index "ads", ["user_id"], name: "index_ads_on_user_id", using: :btree
@@ -41,6 +44,12 @@ ActiveRecord::Schema.define(version: 20140520004857) do
   end
 
   add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers", using: :btree
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "conversations", force: true do |t|
     t.string   "subject",    default: ""
@@ -137,6 +146,7 @@ ActiveRecord::Schema.define(version: 20140520004857) do
     t.string   "url"
     t.string   "phonenumber"
     t.string   "facebook_uid"
+    t.string   "pic3"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

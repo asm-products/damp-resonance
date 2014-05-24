@@ -1,6 +1,7 @@
 class AdsController < ApplicationController
   load_and_authorize_resource except: [:create]
-  before_action :set_ad, only: [:show, :edit, :update, :destroy]
+  before_action :set_ad, only: [:show, :edit, :update, :destroy] 
+  before_filter :prepare_categories
 
   # GET /ads
   # GET /ads.json
@@ -9,15 +10,23 @@ class AdsController < ApplicationController
       #@ads = Ad.where(["description LIKE :tag", {:tag => params[:keywords]}]).near(current_user, 100000, :order => "distance")
       #@ads = PgSearch.multisearch(params[:keywords]).near(current_user, 100000, :order => "distance")
       if params[:my_ads].present?
-        @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000)
-      else
-        @ads = Ad.search_ad(params[:keywords]).near(current_user, 100000, :order => "distance")
+        if current_user
+         @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000).page(params[:page]).per(1)
+        else
+         @ads = Ad.all.near('New York, NY, US',1000000).page(params[:page]).per(1)
+        end      
+       else
+        if current_user
+         @ads = Ad.search_ad(params[:keywords]).near(current_user, 1000000, :order => "distance").page(params[:page]).per(1)
+        else
+         @ads = Ad.search_ad(params[:keywords]).near('New York, NY, US', 1000000, :order => "distance").page(params[:page]).per(1)
+        end
       end
      else
       if params[:my_ads].present?
-        @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000)
+        @ads = Ad.where("user_id = ?", current_user.id).near(current_user, 1000000).page(params[:page]).per(1)
       else        
-        @ads = Ad.near(current_user, 100000, :order => "distance")
+        @ads = Ad.near(current_user, 100000, :order => "distance").page(params[:page]).per(1)
       end
     end
   end
@@ -86,4 +95,10 @@ class AdsController < ApplicationController
     def ad_params
       params[:ad].permit!
     end
+
+    private
+
+   def prepare_categories
+     @categories = Category.all
+   end
 end
