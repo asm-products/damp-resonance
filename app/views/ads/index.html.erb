@@ -1,35 +1,49 @@
 <h1>Search Ads</h1>
-<%= form_tag ads_path, :method => :get do %>
-  <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
-  <% if current_user %>
-  <p><%= check_box_tag(:my_ads) %>
-  <%= label_tag(:my_ads, "Show Only My Ads") %>
-  <% end %>
-  <p><%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= grid(@ads_grid, show_filters: :always) do |g|
+  
+  g.column name: 'THUMBNAIL' do |ad|
+   image_tag ad.pic_url(:thumb)
+  end
 
-  <tbody>
-<%= paginate @ads %>
-<% @ads.each do |ad| %>
-      <tr>
-        <td><%= image_tag ad.pic_url(:thumb) %></td>
-        <td><%= link_to ad.title, ad %> Listed -  <%= ad.created_at.to_date %>
-        <td>Distance - <%= ad.distance.round(2) %> Miles</td>
-        <td><%= link_to 'Show', ad %></td>
-        <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-        <td><%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-</tbody>
-</table>
+  g.column name: 'TITLE', attribute: 'title' do |ad|
+   ad.title
+  end
+ 
+  g.column name: 'DESCRIPTION', attribute: 'description' do |ad|
+   ad.description
+  end
+g.column name: 'PRICE', attribute: 'price_cents' do |ad|
+   ad.price
+  end
+  g.column name: 'CATEGORY', attribute: 'category_id',
+           custom_filter: Category.all.map{|cg| [cg.name, cg.id]} do |ad|
+   ad.category.name if ad.category
+  end  
+
+  g.column name: 'DISTANCE' do |ad|
+   ad.distance.round(2)
+  end
+
+  
+
+  g.column name: 'DATE ADDED', attribute: 'created_at' do |ad|
+   ad.created_at.to_date
+  end
+
+  g.column do |ad|
+   link_to('Show', ad)
+  end
+
+  g.column do |ad|
+   link_to('Edit', edit_ad_path(ad))
+  end
+ 
+  g.column do |ad|
+   link_to('Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' })
+  end  
+
+end %>
 
 <br>
 

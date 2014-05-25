@@ -6,13 +6,30 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-         @ads_grid = initialize_grid(Ad.near(current_user, 1000000), 
-             include: :category, 
-             custom_order: { 
-               'ads.category_id' => 'categories.name' 
-             } 
-            )
+    if params[:keywords].present?
+      #@ads = Ad.where(["description LIKE :tag", {:tag => params[:keywords]}]).near(current_user, 100000, :order => "distance")
+      #@ads = PgSearch.multisearch(params[:keywords]).near(current_user, 100000, :order => "distance")
+      if params[:my_ads].present?
+        if current_user
+         @ads_grid = initialize_grid(Ad.where("user_id = ?", current_user.id).near(current_user, 1000000))
+        else
+         @ads_grid = initialize_grid(Ad.all.near('New York, NY, US',1000000))
+        end      
+       else
+        if current_user
+         @ads_grid = initialize_grid(Ad.search_ad(params[:keywords]).near(current_user, 1000000, :order => "distance"))
+        else
+         @ads_grid = initialize_grid(Ad.search_ad(params[:keywords]).near('New York, NY, US', 1000000, :order => "distance"))
+        end
+      end
+     else
+      if params[:my_ads].present?
+        @ads_grid = initialize_grid(Ad.where("user_id = ?", current_user.id).near(current_user, 1000000))
+      else        
+        @ads_grid = initialize_grid(Ad.where(current_user, 100000, :order => "distance"))
+      end
     end
+  end
 
   # GET /ads/1
   # GET /ads/1.json

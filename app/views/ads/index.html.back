@@ -1,0 +1,43 @@
+<h1>Search Ads</h1>
+<%= form_tag ads_path, :method => :get do %>
+  <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
+  <% if current_user %>
+  <p><%= check_box_tag(:my_ads) %>
+  <%= label_tag(:my_ads, "Show Only My Ads") %>
+  <% end %>
+  <p><%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Picture</th>
+      <th>Title</th>
+      <th>Created at</th>
+      <th>Distance</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<%= paginate @ads %>
+<% @ads.each do |ad| %>
+      <tr>
+        <td><%= image_tag ad.pic_url(:thumb) %></td>
+        <td><%= link_to ad.title, ad %></td>  
+        <td><%= ad.created_at.to_date %></td>
+        <td><%= ad.distance.round(2) %></td>
+        <td><%= link_to 'Show', ad %></td>
+        <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
+        <td><%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+</tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ad', new_ad_path %>
