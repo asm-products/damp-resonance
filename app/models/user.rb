@@ -22,16 +22,17 @@ class User < ActiveRecord::Base
 end  
 
   def display_name
-    return "#{name}"
+    return name
   end
+
+  def mailboxer_email(object)
+    return email
+  end  
 
   def full_address
     [address, city, state, zip].compact.join(', ')
   end
 
-  def mailboxer_email(object)
-    return "{email}"
-  end
 
 end
 

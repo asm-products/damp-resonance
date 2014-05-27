@@ -33,7 +33,6 @@ gem 'pg_search'
 gem 'cancan'
 gem 'domp'
 gem 'money-rails'
-gem 'kaminari'
 gem 'wice_grid'
 group :development do
   gem 'better_errors'

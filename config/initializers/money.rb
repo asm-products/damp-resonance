@@ -62,6 +62,7 @@ MoneyRails.configure do |config|
   # Default value is nil meaning "ignore this option".
   # Options are nil, true, false.
   #
-  # config.no_cents_if_whole = nil
-  # config.symbol = nil
+   config.no_cents_if_whole = true
+   config.symbol = true
+   config.sign_before_symbol = true
 end

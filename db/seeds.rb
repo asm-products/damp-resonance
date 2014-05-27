@@ -4,6 +4,31 @@
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+    Category.create([{ name: 'Antiques' }, 
+                      { name: 'Baby Clothes' },
+                      { name: 'Baby Toys' },
+                      { name: 'Bikes' },
+                      { name: 'Boats' },
+                      { name: 'Books' },
+                      { name: 'Campers' },
+                      { name: 'Womens Clothes' }, 
+                      { name: 'Mens Clothes' },
+                      { name: 'Computer' },
+                      { name: 'Electronics' },
+                      { name: 'Cars' },
+                      { name: 'Trucks' },
+                      { name: 'ATVs' },
+                      { name: 'Tools' },
+                      { name: 'Motorcycles' },
+                      { name: 'Appliances' }, 
+                      { name: 'Video Games' },
+                      { name: 'Toys' },                
+                      { name: 'Furniture' },
+                      { name: 'Household' },
+                      { name: 'Jobs' }, 
+                      { name: 'Collectibles' },
+                      { name: 'Property For Sale' }, 
+                      { name: 'Property For Rent' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email

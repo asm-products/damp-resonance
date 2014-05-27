@@ -1,5 +1,6 @@
 <h1>Search Ads</h1>
 
+
 <%= grid(@ads_grid, show_filters: :always) do |g|
   
   g.column name: 'THUMBNAIL' do |ad|
@@ -11,18 +12,26 @@
   end
  
   g.column name: 'DESCRIPTION', attribute: 'description' do |ad|
-   ad.description
+   ad.description[0,100]
   end
-g.column name: 'PRICE', attribute: 'price_cents' do |ad|
-   ad.price
+  
+  g.column name: 'PRICE', attribute: 'price_cents' do |ad|
+   humanized_money_with_symbol ad.price
   end
+
   g.column name: 'CATEGORY', attribute: 'category_id',
            custom_filter: Category.all.map{|cg| [cg.name, cg.id]} do |ad|
    ad.category.name if ad.category
   end  
 
+  g.column name: 'CITY' do |ad|
+   [ad.address, ad.city, ad.state, ad.zip].compact.join(', ')
+  end
+  
   g.column name: 'DISTANCE' do |ad|
-   ad.distance.round(2)
+   if current_user
+    ad.distance.round(2)
+   end
   end
 
   
@@ -35,16 +44,25 @@ g.column name: 'PRICE', attribute: 'price_cents' do |ad|
    link_to('Show', ad)
   end
 
+
   g.column do |ad|
-   link_to('Edit', edit_ad_path(ad))
+   if current_user
+    link_to('Edit', edit_ad_path(ad))
+   end
   end
  
   g.column do |ad|
-   link_to('Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' })
+   if current_user
+    link_to('Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' })
+   end
   end  
 
 end %>
 
+
+
 <br>
 
+<% if current_user %>
 <%= link_to 'New Ad', new_ad_path %>
+<% end %>
