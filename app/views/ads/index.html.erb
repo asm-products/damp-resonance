@@ -4,6 +4,7 @@
     <th>Title</th>
     <th>Price</th>
     <th>Description</th>
+    <th>Distance</th>
   </tr>
 </thead>
 <tbody>
@@ -12,7 +13,16 @@
       <td><%= link_to(ad.title, ad) %></td>
       <td><%= ad.price %></td>
       <td><%= ad.description %></td>
+      <td><%= ad.distance.round(2) %></td>
     </tr>
   <% end %>
 </tbody>
+<tfoot>
+  <tr>
+    <td>Title</td>
+    <td>Price</td>
+    <td>Description</td>
+    <td>Distance</td>
+  </tr>
+</tfoot>
 </table>

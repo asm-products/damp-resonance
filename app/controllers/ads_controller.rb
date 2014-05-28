@@ -7,19 +7,9 @@ class AdsController < ApplicationController
   # GET /ads.json
   def index
         if current_user
-         @ads_grid = initialize_grid(Ad.near(current_user, 1000000), 
-             include: :category, 
-             custom_order: { 
-               'ads.category_id' => 'categories.name' 
-             } 
-            )
-        else
-         @ads_grid = initialize_grid(Ad.near('New York, NY, USA', 1000000), 
-             include: :category, 
-             custom_order: { 
-               'ads.category_id' => 'categories.name' 
-             } 
-            )
+         @ads = Ad.near(current_user, 1000000)
+          else
+         @ads = Ad.near('New York, NY, USA', 1000000) 
         end
 
     end
