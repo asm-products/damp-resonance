@@ -14,7 +14,7 @@ class Ad < ActiveRecord::Base
   mount_uploader :pic2, Pic2Uploader
   mount_uploader :pic3, Pic3Uploader
   monetize :price_cents
-  paginates_per 1
+
 
   include PgSearch
   #multisearchable :against => [:title, :description]

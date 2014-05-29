@@ -33,7 +33,7 @@ gem 'pg_search'
 gem 'cancan'
 gem 'domp'
 gem 'money-rails'
-gem 'wice_grid'
+#gem 'wice_grid'
 gem 'jquery-datatables-rails'
 group :development do
   gem 'better_errors'
