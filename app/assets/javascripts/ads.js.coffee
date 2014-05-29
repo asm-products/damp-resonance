@@ -1,2 +1,3 @@
 jQuery ->
-   $("#ads_list").dataTable().columnFilter();
+   $('#ads_list').dataTable().columnFilter()
+    
