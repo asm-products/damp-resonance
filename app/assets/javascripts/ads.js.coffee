@@ -8,6 +8,8 @@ jQuery ->
                       null, 
                       { type: "select" },
                       { type: "select" },
-                      { type: "select" }
+                      { type: "select" },
+                      null,
+                      null
                       ] });
     

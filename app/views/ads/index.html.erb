@@ -10,6 +10,8 @@
     <th>City</th>
     <th>State</th>
     <th>Zip</th>
+    <th></th>
+    <th></th>
   </tr>
 </thead>
 <tbody>
@@ -19,11 +21,17 @@
       <td><%= ad.category.name %></td>
       <td><%= link_to(ad.title, ad) %></td>
       <td><%= ad.price %></td>
-      <td><%= ad.description %></td>
-      <td><%= ad.distance.round(2) %></td>
+      <td><%= ad.description[0,100] %></td>
+      <td><%= ad.distance.round(0) %></td>
       <td><%= ad.city %></td>
       <td><%= ad.state %></td>
       <td><%= ad.zip %></td>
+      <td><% if can? :update, ad %>
+      <%= link_to 'Edit', edit_ad_path(ad) %>
+      <% end %></td>
+      <td><% if can? :destroy, ad %>
+      <%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %></td>
     </tr>
   <% end %>
 </tbody>
@@ -38,6 +46,8 @@
     <td>City</td>
     <td>State</td>
     <td>Zip</td>
+    <td></td>
+    <td></td>
   </tr>
 </tfoot>
 </table>
