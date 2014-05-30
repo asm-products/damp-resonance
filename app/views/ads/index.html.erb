@@ -1,25 +1,46 @@
 <table id="ads_list">
 <thead>
   <tr>
+    <th>Picture</th>
+    <th>Category</th>
     <th>Title</th>
     <th>Price</th>
     <th>Description</th>
+    <th>Distance</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
   </tr>
 </thead>
 <tbody>
   <% @ads.each do |ad| %>
     <tr>
+      <td><%= image_tag ad.pic_url(:thumb) %></td>
+      <td><%= ad.category.name %></td>
       <td><%= link_to(ad.title, ad) %></td>
       <td><%= ad.price %></td>
       <td><%= ad.description %></td>
+      <td><%= ad.distance.round(2) %></td>
+      <td><%= ad.city %></td>
+      <td><%= ad.state %></td>
+      <td><%= ad.zip %></td>
     </tr>
   <% end %>
 </tbody>
 <tfoot>
   <tr>
+    <td>Picture</td>
+    <td>Category</td>
     <td>Title</td>
     <td>Price</td>
     <td>Description</td>
+    <td>Distance</td>
+    <td>City</td>
+    <td>State</td>
+    <td>Zip</td>
   </tr>
 </tfoot>
 </table>
+<% if current_user %>
+<%= link_to 'New Ad', new_ad_path %>
+<% end %>
