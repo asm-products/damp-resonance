@@ -6,13 +6,17 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-        if current_user
-         @ads = Ad.near(current_user, 1000000)
-          else
-         @ads = Ad.near('New York, NY, USA', 1000000) 
-        end
+        #if current_user
+        # @ads = Ad.near(current_user, 1000000)
+        #  else
+        # @ads = Ad.near('New York, NY, USA', 1000000) 
+        #end
+    respond_to do |format|
+      format.html
+      format.json { render json: AdsDatatable.new(view_context) }
 
     end
+   end
 
   # GET /ads/1
   # GET /ads/1.json

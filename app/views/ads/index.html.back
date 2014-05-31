@@ -1,43 +1,56 @@
-<h1>Search Ads</h1>
-<%= form_tag ads_path, :method => :get do %>
-  <p>Keywords<%= text_field_tag :keywords, params[:keywords] %>
-  <% if current_user %>
-  <p><%= check_box_tag(:my_ads) %>
-  <%= label_tag(:my_ads, "Show Only My Ads") %>
-  <% end %>
-  <p><%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
-<table>
-  <thead>
+<table id="ads_list">
+<thead>
+  <tr>
+    <th>Picture</th>
+    <th>Category</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Distance</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <% @ads.each do |ad| %>
     <tr>
-      <th>Picture</th>
-      <th>Title</th>
-      <th>Created at</th>
-      <th>Distance</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <td><%= image_tag ad.pic_url(:thumb) %></td>
+      <td><%= ad.category.name %></td>
+      <td><%= link_to(ad.title, ad) %></td>
+      <td><%= ad.price %></td>
+      <td><%= ad.description[0,100] %></td>
+      <td><%= ad.distance.round(0) %></td>
+      <td><%= ad.city %></td>
+      <td><%= ad.state %></td>
+      <td><%= ad.zip %></td>
+      <td><% if can? :update, ad %>
+      <%= link_to 'Edit', edit_ad_path(ad) %>
+      <% end %></td>
+      <td><% if can? :destroy, ad %>
+      <%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %></td>
     </tr>
-  </thead>
-
-  <tbody>
-<%= paginate @ads %>
-<% @ads.each do |ad| %>
-      <tr>
-        <td><%= image_tag ad.pic_url(:thumb) %></td>
-        <td><%= link_to ad.title, ad %></td>  
-        <td><%= ad.created_at.to_date %></td>
-        <td><%= ad.distance.round(2) %></td>
-        <td><%= link_to 'Show', ad %></td>
-        <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
-        <td><%= link_to 'Destroy', ad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% end %>
 </tbody>
+<tfoot>
+  <tr>
+    <td>Picture</td>
+    <td>Category</td>
+    <td>Title</td>
+    <td>Price</td>
+    <td>Description</td>
+    <td>Distance</td>
+    <td>City</td>
+    <td>State</td>
+    <td>Zip</td>
+    <td></td>
+    <td></td>
+  </tr>
+</tfoot>
 </table>
-
-<br>
-
+<% if current_user %>
 <%= link_to 'New Ad', new_ad_path %>
+<% end %>

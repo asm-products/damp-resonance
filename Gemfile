@@ -47,4 +47,4 @@ end
 
 gem "omniauth"
 gem "omniauth-facebook"
-
+gem "will_paginate"

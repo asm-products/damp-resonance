@@ -1,15 +1,7 @@
 jQuery ->
-   $('#ads_list').dataTable().columnFilter({
-         aoColumns: [ null,
-                      { type: "select" },
-                      { type: "text" },
-                      null,  
-                      { type: "text" },  
-                      null, 
-                      { type: "select" },
-                      { type: "select" },
-                      { type: "select" },
-                      null,
-                      null
-                      ] });
-    
+   $('#ads').dataTable
+         sPaginationType: "full_numbers"
+         sJQueryUI: true
+         bProcessing: true
+         bServerSide: true
+         sAjaxSource: $('#ads').data('source')
