@@ -23,7 +23,7 @@ gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
 gem 'unicorn-rails'
-gem 'geocoder', '~> 1.2.0'
+gem 'geocoder'
 gem 'gmaps4rails'
 gem 'cloudinary'
 gem 'carrierwave'
@@ -47,4 +47,5 @@ end
 
 gem "omniauth"
 gem "omniauth-facebook"
-gem "will_paginate"
+#gem "will_paginate"
+gem "kaminari"

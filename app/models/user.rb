@@ -7,8 +7,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  geocoded_by :zip
-  reverse_geocoded_by :latitude, :longitude
+  geocoded_by :full_address
+  reverse_geocoded_by :latitude, :longitude do |obj, results|
+   if geo = results.first
+   obj.zip = geo.postal_code
+   end
+  end
   after_validation :geocode, :reverse_geocode
 
   def self.find_for_facebook_oauth(auth)
@@ -17,7 +21,9 @@ class User < ActiveRecord::Base
     user.uid = auth.uid
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
-    user.url = auth.extra.raw_info.link   
+    user.url = auth.extra.raw_info.link
+    user.city = auth.info.location.split(",")[0]
+    user.state = auth.info.location.split(",")[1]
   end
 end  
 

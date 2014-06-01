@@ -1,5 +1,5 @@
-class AdsDatatable
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+﻿class AdsDatatable 
+  delegate :current_user, :params, :h, :link_to, :number_to_currency, to: :@view
 
   def initialize(view)
     @view = view
@@ -9,19 +9,41 @@ class AdsDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Ad.count,
-      iTotalDisplayRecords: ads.total_entries,
+      iTotalDisplayRecords: ads.total_count,
       aaData: data
     }
-  end
+  end 
 
 private
 
   def data
+   if current_user
     ads.map do |ad|
       [
-        link_to(ad.title, ad)
+        ad.category.name,
+        link_to(ad.title, ad),
+        (ad.price_cents) * 0.01,
+        ad.description[0,100],
+        ad.distance_to(current_user.zip).round(0),
+        ad.city, 
+        ad.state,
+        ad.zip
       ]
     end
+   else
+    ads.map do |ad|
+      [
+        ad.category.name,
+        link_to(ad.title, ad),
+        (ad.price_cents) * 0.01,
+        ad.description[0,100],
+        ad.distance_to('14810').round(0),
+        ad.city, 
+        ad.state,
+        ad.zip
+      ]
+    end
+   end
   end
 
   def ads
@@ -30,12 +52,12 @@ private
 
   def fetch_ads
     ads = Ad.order("#{sort_column} #{sort_direction}")
-    ads = ads.page(page).per_page(per_page)
+    ads = ads.page(page).per(per_page)
     if params[:sSearch].present?
-      ads = ads.where("title like :search", search: "%#{params[:sSearch]}%")
-      #Ads = ads.all
+      #ads = PgSearch.multisearch(params[:sSearch]).page(params[:page]).per(per_page)
+      ads = ads.where("title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
      end
-    ads
+    ads 
   end
 
   def page
@@ -47,11 +69,13 @@ private
   end
 
   def sort_column
-    columns = %w[title]
+    columns = %w[category_id title price_cents description longitude city state zip]
     columns[params[:iSortCol_0].to_i]
   end
 
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
   end
+
+  
 end

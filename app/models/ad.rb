@@ -17,8 +17,8 @@ class Ad < ActiveRecord::Base
 
 
   include PgSearch
-  #multisearchable :against => [:title, :description]
-  pg_search_scope :search_ad, :against => [:title, :description], :using => { :tsearch => {:prefix => true}}
+  multisearchable :against => [:title, :description]
+  #pg_search_scope :search_ad, :against => [:title, :description], :using => { :tsearch => {:prefix => true}}
    
   def full_address
     [address, city, state, zip].compact.join(', ')

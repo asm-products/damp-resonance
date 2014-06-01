@@ -28,7 +28,7 @@
                       { name: 'Jobs' }, 
                       { name: 'Collectibles' },
                       { name: 'Property For Sale' }, 
-                      { name: 'Property For Rent',
+                      { name: 'Property For Rent' }, 
                       { name: 'Yard Sales' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #user = CreateAdminService.new.call
