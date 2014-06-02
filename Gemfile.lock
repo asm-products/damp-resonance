@@ -151,10 +151,6 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    pg_search (0.7.3)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     polyglot (0.3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -211,6 +207,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    textacular (3.2.0)
+      activerecord (>= 3.0, < 4.2)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -272,7 +270,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg
-  pg_search
   quiet_assets
   rails (= 4.1.0)
   rails_12factor
@@ -281,6 +278,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simple_form
   spring
+  textacular
   therubyracer
   turbolinks
   twitter-bootstrap-rails

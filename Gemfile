@@ -32,7 +32,7 @@ gem 'koala'
 #gem 'discuss'
 gem 'haml'
 gem 'rails_12factor'
-gem 'pg_search'
+#gem 'pg_search'
 gem 'cancan'
 gem 'domp'
 gem 'money-rails'
@@ -49,3 +49,4 @@ gem "omniauth"
 gem "omniauth-facebook"
 #gem "will_paginate"
 gem "kaminari"
+gem "textacular"

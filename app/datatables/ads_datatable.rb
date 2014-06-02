@@ -55,7 +55,8 @@ private
     ads = ads.page(page).per(per_page)
     if params[:sSearch].present?
       #ads = PgSearch.multisearch(params[:sSearch]).page(params[:page]).per(per_page)
-      ads = ads.where("title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
+      #ads = ads.where("title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
+       ads = ads.basic_search(params[:sSearch])
      end
     ads 
   end

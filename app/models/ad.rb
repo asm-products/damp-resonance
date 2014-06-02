@@ -16,8 +16,8 @@ class Ad < ActiveRecord::Base
   monetize :price_cents
 
 
-  include PgSearch
-  multisearchable :against => [:title, :description]
+  #include PgSearch
+  #multisearchable :against => [:title, :description]
   #pg_search_scope :search_ad, :against => [:title, :description], :using => { :tsearch => {:prefix => true}}
    
   def full_address
