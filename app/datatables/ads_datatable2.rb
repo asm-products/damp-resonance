@@ -1,4 +1,4 @@
-﻿class AdsDatatable 
+﻿class AdsDatatable2
   delegate :current_user, :params, :h, :link_to, :number_to_currency, to: :@view
 
   def initialize(view)
@@ -24,11 +24,7 @@ private
         link_to(ad.title, ad),
         (ad.price_cents) * 0.01,
         ad.description[0,100],
-        ad.distance_to(current_user.zip).round(0),
-        ad.city, 
-        ad.state,
-        ad.zip,
-        ad.created_at.to_date
+        ad.user_id
       ]
     end
    else
@@ -38,11 +34,7 @@ private
         link_to(ad.title, ad),
         (ad.price_cents) * 0.01,
         ad.description[0,100],
-        ad.distance_to('14810').round(0),
-        ad.city, 
-        ad.state,
-        ad.zip,
-        ad.created_at.to_date
+        ad.user_id
       ]
     end
    end
@@ -55,13 +47,7 @@ private
   def fetch_ads
     ads = Ad.order("#{sort_column} #{sort_direction}")
     ads = ads.page(page).per(per_page)
-    if params[:sSearch].present?
-      #ads = PgSearch.multisearch(params[:sSearch]).page(params[:page]).per(per_page)
-      #ads = ads.where("category.name ilike :search or title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
-      ads = ads.basic_search(params[:sSearch])
-      #ads = ads.where("user_id = ?", current_user.id)
-     end
-    ads
+    ads = ads.where(user_id = ?, current_user.id)
   end
 
   def page
@@ -73,7 +59,7 @@ private
   end
 
   def sort_column
-    columns = %w[category_id title price_cents description zip city state zip created_at]
+    columns = %w[category_id title price_cents description user_id]
     columns[params[:iSortCol_0].to_i]
   end
 

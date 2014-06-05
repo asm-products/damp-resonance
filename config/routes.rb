@@ -4,6 +4,7 @@ Zipifieds::Application.routes.draw do
   get 'messages/index'
 
   get 'conversations/index'
+  get 'ads/myindex'
 
   root :to => "home#index"
   devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
