@@ -9,6 +9,7 @@ class Ability
        user ||= User.new # guest user (not logged in)
        if user.id?
          can :manage, :all, :user_id => user.id
+         can :read, :all
        else
          can :read, :all
        end

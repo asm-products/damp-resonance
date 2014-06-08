@@ -1,7 +1,7 @@
 <table id="ads" class="display" data-source="<%= ads_url(format: "json") %>">
 <thead>
   <tr>
-    <th>Category</th>
+    <th>Categories</th>
     <th>Title</th>
     <th>Price</th>
     <th>Description</th>
@@ -15,6 +15,3 @@
 <tbody>
 </tbody>
 </table>
-<% if current_user %>
-<%= link_to 'New Ad', new_ad_path %>
-<% end %>

@@ -29,6 +29,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    awesome_nested_set (2.1.6)
+      activerecord (>= 3.0.0)
     aws_cf_signer (0.1.2)
     bcrypt (3.1.7)
     better_errors (1.1.0)
@@ -244,6 +246,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_nested_set
   better_errors
   binding_of_caller
   bootstrap-sass

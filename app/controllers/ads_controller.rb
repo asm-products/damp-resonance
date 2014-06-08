@@ -1,8 +1,7 @@
 class AdsController < ApplicationController
   load_and_authorize_resource except: [:create]
   before_action :set_ad, only: [:show, :edit, :update, :destroy] 
-  before_filter :prepare_categories
-
+  
   # GET /ads
   # GET /ads.json
   def index
@@ -19,16 +18,7 @@ class AdsController < ApplicationController
    end
 
    def myindex
-        #if current_user
-        # @ads = Ad.near(current_user, 1000000)
-        #  else
-        # @ads = Ad.near('New York, NY, USA', 1000000) 
-        #end
-    respond_to do |format|
-      format.html
-      format.json { render json: AdsDatatable.new(view_context) }
-
-    end
+    @ads = Ad.where("user_id = ?", current_user.id)
    end
 
   # GET /ads/1
@@ -96,9 +86,5 @@ class AdsController < ApplicationController
       params[:ad].permit!
     end
 
-    private
-
-   def prepare_categories
-     @categories = Category.all
-   end
+   
 end

@@ -1,16 +1,22 @@
-<table id="myads" class="display" data-source="<%= ads_url(format: "json") %>">
-<thead>
+<h1>Listing ads</h1>
+ 
+<table>
   <tr>
-    <th>Category</th>
     <th>Title</th>
-    <th>Price</th>
     <th>Description</th>
-    <th>User Id</th>
   </tr>
-</thead>
-<tbody>
-</tbody>
+ 
+  <% @ads.each do |ad| %>
+    <tr>
+     <% if can? :manage, ad %>
+      <td><%= ad.title %></td>
+      <td><%= ad.description %></td>
+      <td><%= link_to 'Show', ad_path(ad) %></td>
+      <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
+      <td><%= link_to "Destroy", ad, :method => :delete, :confirm => "Are you sure?" %></td>
+     <% end %>
+    </tr>
+  <% end %>
 </table>
-<% if current_user %>
+
 <%= link_to 'New Ad', new_ad_path %>
-<% end %>

@@ -24,12 +24,12 @@ private
         link_to(ad.title, ad),
         (ad.price_cents) * 0.01,
         ad.description[0,100],
-        ad.distance_to(current_user.zip).round(0),
+        "#{ad.distance_to(current_user.zip).round(0)} Miles",
         ad.city, 
         ad.state,
         ad.zip,
         ad.created_at.to_date
-      ]
+    ]
     end
    else
     ads.map do |ad|
@@ -58,9 +58,10 @@ private
     if params[:sSearch].present?
       #ads = PgSearch.multisearch(params[:sSearch]).page(params[:page]).per(per_page)
       #ads = ads.where("category.name ilike :search or title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
-      ads = ads.basic_search(params[:sSearch])
-      #ads = ads.where("user_id = ?", current_user.id)
-     end
+     ads = ads.basic_search(params[:sSearch])
+     #ads = ads.where("id = ?", params[:userid])
+    end
+   #ads = ads.where("user_id = ?", params[:Userid])
     ads
   end
 
