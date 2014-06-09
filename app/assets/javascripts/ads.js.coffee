@@ -4,14 +4,4 @@ jQuery ->
     sJQueryUI: true
     bProcessing: true
     bServerSide: true
-    sAjaxSource: $('#ads').data('source')
-    "aoColumns": [
-      null, 
-      null, 
-      null, 
-      null,
-      { "bSortable": false }
-      null, 
-      null, 
-      null,
-      null ])
+    sAjaxSource: $('#ads').data('source')).columnFilter()

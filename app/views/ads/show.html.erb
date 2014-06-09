@@ -7,7 +7,7 @@
 <% if @ad.user.url %>
 <p><%= link_to("Facebook Page", @ad.user.url, :target => "_blank") %></p>
 <% end %>
-<p>Description: <%= simple_format(@ad.description) %></p>
+<p>Description: <%= simple_format(@ad.description) %></p> 
 <p><% unless @ad.pic_url.nil? %><%= image_tag @ad.pic_url %><br /><% end %>
 <p><% unless @ad.pic2_url.nil? %><%= image_tag @ad.pic2_url %><br /><% end %>
 <p><% unless @ad.pic3_url.nil? %><%= image_tag @ad.pic3_url %><br /><% end %>

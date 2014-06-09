@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
+  self.primary_key = :id
   geocoded_by :full_address
   reverse_geocoded_by :latitude, :longitude do |obj, results|
    if geo = results.first

@@ -16,6 +16,18 @@
 
 private
 
+  def quick_search
+    search_for = params[:sSearch].split(' ')
+    terms = {}
+    which_one = -1 
+    criteria = search_for.inject([]) do |criteria,atom|
+      which_one += 1
+      terms["search#{which_one}".to_sym] = "%#{atom}%"
+      criteria << "(#{search_cols.map{|col| "#{col} like :search#{which_one}"}.join(' or ')})"
+    end.join(' and ')
+    [criteria, terms]
+  end
+  
   def data
    if current_user
     ads.map do |ad|
@@ -24,7 +36,7 @@ private
         link_to(ad.title, ad),
         (ad.price_cents) * 0.01,
         ad.description[0,100],
-        "#{ad.distance_to(current_user.zip).round(0)} Miles",
+        "#{ad.distance_to(current_user.to_coordinates).round(0)} Miles",
         ad.city, 
         ad.state,
         ad.zip,
@@ -38,7 +50,7 @@ private
         link_to(ad.title, ad),
         (ad.price_cents) * 0.01,
         ad.description[0,100],
-        ad.distance_to('14810').round(0),
+        "NA",
         ad.city, 
         ad.state,
         ad.zip,
@@ -53,16 +65,24 @@ private
   end
 
   def fetch_ads
-    ads = Ad.order("#{sort_column} #{sort_direction}")
+    ads = Ad.reorder("#{sort_column} #{sort_direction}")
     ads = ads.page(page).per(per_page)
-    if params[:sSearch].present?
-      #ads = PgSearch.multisearch(params[:sSearch]).page(params[:page]).per(per_page)
-      #ads = ads.where("category.name ilike :search or title ilike :search or description ilike :search or city ilike :search", search: "%#{params[:sSearch]}%")
-     ads = ads.basic_search(params[:sSearch])
-     #ads = ads.where("id = ?", params[:userid])
+    if current_user
+     if params[:sSearch].present?
+      #ads = ads.near(current_user, 100).where("title ilike :search or description ilike :search or city ilike :search or state ilike :search or zip ilike :search", search: "%#{params[:sSearch_3]}%")
+      #ads = ads.near(current_user, 100).where(quick_search)
+      #ads = ads.near(current_user, 100)
+      ads = ads.near(current_user, 1000000).basic_search(params[:sSearch])
+     end
+      ads
     end
-   #ads = ads.where("user_id = ?", params[:Userid])
-    ads
+     if params[:sSearch].present?
+      #ads = ads.where("title ilike :search or description ilike :search or city ilike :search or state ilike :search or state ilike :search or zip ilike :search", search: "%#{params[:sSearch_3]}%")
+      #ads = ads.where(quick_search)
+      ads = ads.basic_search(params[:sSearch])
+      #ads = PgSearch.multisearch('camperva')
+     end
+      ads
   end
 
   def page
@@ -74,7 +94,7 @@ private
   end
 
   def sort_column
-    columns = %w[category_id title price_cents description zip city state zip created_at]
+    columns = %w[category_id title price_cents description distance city state zip created_at]
     columns[params[:iSortCol_0].to_i]
   end
 

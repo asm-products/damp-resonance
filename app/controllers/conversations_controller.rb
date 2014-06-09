@@ -3,37 +3,24 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
 
   def index
+   @conversations ||= current_user.mailbox.inbox.all
   end
 
-  def create
-    recipient_emails = conversation_params(:recipients).split(',')
-    recipients = User.where(email: recipient_emails).all
-    #recipients = User.all
-    
-    conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
-
-
-
-    #conversation = current_user.send_message(current_user, *conversation_params(:body, :subject)).conversation
-    
-    
-
-    redirect_to conversation
-  end
-
+  
   def reply
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to conversation
   end
 
   def trash
-    conversation.move_to_trash(current_user)
-    redirect_to :conversations
-  end
+    def trash  
+     conversation.move_to_trash(current_user)  
+     redirect_to :conversations 
+  end 
 
-  def untrash
-    conversation.untrash(current_user)
-    redirect_to :conversations
+  def untrash  
+   conversation.untrash(current_user)  
+   redirect_to :back 
   end
 
   private
@@ -56,11 +43,12 @@ class ConversationsController < ApplicationController
 
   def fetch_params(key, *subkeys)
     params[key].instance_eval do
-      case subkeys.size
+      case subkeys.size 
       when 0 then self
       when 1 then self[subkeys.first]
       else subkeys.map{|k| self[k] }
       end
     end
   end
+ end
 end

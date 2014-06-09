@@ -4,11 +4,11 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   #Configures the default from for the email sent for Messages and Notifications of Mailboxer
-  config.default_from = "zipifieds@gmail.com"
+  config.default_from = "no-reply@mailboxer.com"
 
   #Configures the methods needed by mailboxer
   config.email_method = :mailboxer_email
-  config.name_method = :display_name
+  config.name_method = :name
 
   #Configures if you use or not a search engine and wich one are you using
   #Supported enignes: [:solr,:sphinx]
