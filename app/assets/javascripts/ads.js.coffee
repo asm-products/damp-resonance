@@ -4,4 +4,4 @@ jQuery ->
     sJQueryUI: true
     bProcessing: true
     bServerSide: true
-    sAjaxSource: $('#ads').data('source')).columnFilter()
+    sAjaxSource: $('#ads').data('source'))

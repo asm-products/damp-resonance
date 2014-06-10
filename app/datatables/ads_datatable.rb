@@ -15,18 +15,6 @@
   end 
 
 private
-
-  def quick_search
-    search_for = params[:sSearch].split(' ')
-    terms = {}
-    which_one = -1 
-    criteria = search_for.inject([]) do |criteria,atom|
-      which_one += 1
-      terms["search#{which_one}".to_sym] = "%#{atom}%"
-      criteria << "(#{search_cols.map{|col| "#{col} like :search#{which_one}"}.join(' or ')})"
-    end.join(' and ')
-    [criteria, terms]
-  end
   
   def data
    if current_user
@@ -72,14 +60,14 @@ private
       #ads = ads.near(current_user, 100).where("title ilike :search or description ilike :search or city ilike :search or state ilike :search or zip ilike :search", search: "%#{params[:sSearch_3]}%")
       #ads = ads.near(current_user, 100).where(quick_search)
       #ads = ads.near(current_user, 100)
-      ads = ads.near(current_user, 1000000).basic_search(params[:sSearch])
+      ads = ads.near(current_user, 5000).joins(:category).advanced_search( { title: params[:sSearch], description: params[:sSearch], city: params[:sSearch], state: params[:sSearch], zip: params[:sSearch], categories: { name: params[:sSearch] }} )
      end
       ads
     end
      if params[:sSearch].present?
       #ads = ads.where("title ilike :search or description ilike :search or city ilike :search or state ilike :search or state ilike :search or zip ilike :search", search: "%#{params[:sSearch_3]}%")
       #ads = ads.where(quick_search)
-      ads = ads.basic_search(params[:sSearch])
+      ads = ads.joins(:category).advanced_search( { title: params[:sSearch], description: params[:sSearch], city: params[:sSearch], state: params[:sSearch], zip: params[:sSearch], categories: { name: params[:sSearch] } }, false )
       #ads = PgSearch.multisearch('camperva')
      end
       ads
