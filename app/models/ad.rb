@@ -14,12 +14,11 @@ class Ad < ActiveRecord::Base
   mount_uploader :pic2, Pic2Uploader
   mount_uploader :pic3, Pic3Uploader
   monetize :price_cents
-
-
-  #include PgSearch
-  #multisearchable :against => [:title, :description]
-  #pg_search_scope :search_ad, :against => [:title, :description], :using => { :tsearch => {:prefix => true}}
-   
+ 
+  def self.nearest(user, distance)
+     near(user, distance)
+  end
+ 
   def full_address
     [address, city, state, zip].compact.join(', ')
   end
