@@ -7,7 +7,7 @@ jQuery ->
     bServerSide: true
     sAjaxSource: $('#ads').data('source')
     aoColumns: [
-     { bSortable: false }, 
+     null, 
      null, 
      null, 
      null, 

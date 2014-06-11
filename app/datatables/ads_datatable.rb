@@ -78,8 +78,13 @@ private
   end
 
   def sort_column
-    columns = %w[ title category_id title price_cents description city state zip created_at]
-    columns[params[:iSortCol_0].to_i]
+    if user_signed_in?
+     columns = %w[ distance category_id title price_cents description city state zip created_at]
+     columns[params[:iSortCol_0].to_i]
+    else
+     columns = %w[ zip category_id title price_cents description city state zip created_at]
+     columns[params[:iSortCol_0].to_i]
+    end
   end
 
   def sort_direction
