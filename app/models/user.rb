@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   acts_as_messageable
   has_many :ads, dependent: :destroy
-  devise :database_authenticatable, :registerable,
+  validates_presence_of :zip
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   self.primary_key = :id
@@ -23,13 +24,14 @@ class User < ActiveRecord::Base
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.url = auth.extra.raw_info.link
-    user.city = auth.info.location.split(",")[0]
-    user.state = auth.info.location.split(",")[1]
+    #user.city = auth.info.location.split(",")[0]
+    #user.state = auth.info.location.split(",")[1]
+    #user.token = auth.credentials.token
   end
 end  
 
   def display_name
-    return name
+    "#{name}"
   end
 
   def mailboxer_email(object)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609003201) do
+ActiveRecord::Schema.define(version: 20140614130116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,12 +55,6 @@ ActiveRecord::Schema.define(version: 20140609003201) do
     t.integer  "depth"
   end
 
-  create_table "conversations", force: true do |t|
-    t.string   "subject",    default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
   create_table "facebook_oauth_settings", force: true do |t|
     t.string   "access_token"
     t.integer  "user_id"
@@ -68,7 +62,13 @@ ActiveRecord::Schema.define(version: 20140609003201) do
     t.datetime "updated_at"
   end
 
-  create_table "notifications", force: true do |t|
+  create_table "mailboxer_conversations", force: true do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "mailboxer_notifications", force: true do |t|
     t.string   "type"
     t.text     "body"
     t.string   "subject",              default: ""
@@ -86,17 +86,9 @@ ActiveRecord::Schema.define(version: 20140609003201) do
     t.datetime "expires"
   end
 
-  add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id", using: :btree
+  add_index "mailboxer_notifications", ["conversation_id"], name: "index_mailboxer_notifications_on_conversation_id", using: :btree
 
-  create_table "pg_search_documents", force: true do |t|
-    t.text     "content"
-    t.integer  "searchable_id"
-    t.string   "searchable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "receipts", force: true do |t|
+  create_table "mailboxer_receipts", force: true do |t|
     t.integer  "receiver_id"
     t.string   "receiver_type"
     t.integer  "notification_id",                            null: false
@@ -108,7 +100,15 @@ ActiveRecord::Schema.define(version: 20140609003201) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
+  add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
+
+  create_table "pg_search_documents", force: true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_authentications", force: true do |t|
     t.integer  "user_id"
@@ -151,13 +151,20 @@ ActiveRecord::Schema.define(version: 20140609003201) do
     t.string   "phonenumber"
     t.string   "facebook_uid"
     t.string   "pic3"
+    t.string   "token"
+    t.string   "confirmable"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
+  add_foreign_key "mailboxer_notifications", "mailboxer_conversations", name: "notifications_on_conversation_id", column: "conversation_id"
 
-  add_foreign_key "receipts", "notifications", name: "receipts_on_notification_id"
+  add_foreign_key "mailboxer_receipts", "mailboxer_notifications", name: "receipts_on_notification_id", column: "notification_id"
 
 end

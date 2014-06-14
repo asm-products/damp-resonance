@@ -3,7 +3,6 @@
 
 <%= link_to 'Back', ads_path %>
 <p>Title: <%= @ad.title %></p> 
-<%= link_to 'Start Conversation', :new_conversation %>
 <% if @ad.user.url %>
 <p><%= link_to("Facebook Page", @ad.user.url, :target => "_blank") %></p>
 <% end %>

@@ -1,6 +1,8 @@
 class Ad < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
+  validates :title, :category, :description, :price_cents, :presence => true
+ 
   geocoded_by :zip
   reverse_geocoded_by :latitude, :longitude do |obj, results|
    if geo = results.first

@@ -27,7 +27,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'cloudinary'
 gem 'carrierwave'
-gem 'mailboxer'
+gem 'mailboxer', '~> 0.12.0'
 gem 'koala'
 #gem 'discuss'
 gem 'haml'
@@ -51,3 +51,5 @@ gem "omniauth-facebook"
 gem "kaminari"
 gem "textacular"
 gem "awesome_nested_set"
+#gem 'messaging'
+#gem 'oauth'

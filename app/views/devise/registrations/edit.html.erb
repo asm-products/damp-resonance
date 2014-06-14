@@ -7,14 +7,6 @@
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :city %>
-      <%= f.text_field :city, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :state %>
-      <%= f.text_field :state, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
       <%= f.label :zip %>
       <%= f.text_field :zip, :autofocus => true, class: 'form-control' %>
     </div>
@@ -34,6 +26,13 @@
       <div class="form-group">
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <p>You must enter your current password to make changes.</p>
+      <div class="form-group">
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
     <%= f.submit 'Update', :class => 'button right' %>

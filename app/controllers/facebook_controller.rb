@@ -14,7 +14,7 @@ before_filter :authenticate_user!
   def callback
     unless current_user.facebook_oauth_setting
 		@oauth = session["oauth_obj"]
-		FacebookOauthSetting.create({:access_token => @oauth.get_access_token(params[:code]), :user_id => current_user.id})
+		FacebookOauthSetting.create({:access_token => @oauth.get_access_token_info(params[:code]), :user_id => current_user.id})
 		redirect_to "/facebook_profile"
 	else
 		redirect_to "/"
