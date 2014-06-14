@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  acts_as_messageable
+ #acts_as_messageable
   has_many :ads, dependent: :destroy
   validates_presence_of :zip
   devise :database_authenticatable, :registerable, :confirmable,
