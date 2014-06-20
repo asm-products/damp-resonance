@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20],
-          zip: zip ? zip : "#{TEMP_ZIP}",
+          self.zip = "14823",
           provider: "#{auth.provider}"
         )
         #user.skip_confirmation!
