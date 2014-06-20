@@ -27,11 +27,15 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts_more_seo (1.1.4)
+      babosa
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    attr_required (1.0.0)
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     aws_cf_signer (0.1.2)
+    babosa (0.3.11)
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -72,6 +76,11 @@ GEM
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    fb_graph (2.7.15)
+      httpclient (>= 2.2.0.2)
+      multi_json (>= 1.3)
+      rack-oauth2 (>= 0.14.4)
+      tzinfo
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     foreman (0.66.0)
@@ -83,6 +92,7 @@ GEM
       tilt
     hashie (2.1.1)
     hike (1.2.3)
+    httpclient (2.4.0)
     i18n (0.6.9)
     jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
@@ -135,6 +145,7 @@ GEM
     multi_json (1.9.3)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    oauth (0.4.7)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
       jwt (~> 0.1.8)
@@ -146,17 +157,31 @@ GEM
       rack (~> 1.0)
     omniauth-facebook (1.6.0)
       omniauth-oauth2 (~> 1.1)
+    omniauth-linkedin (0.2.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     omniauth-oauth2 (1.1.2)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
       oauth2 (~> 0.9.3)
       omniauth (~> 1.2)
+    omniauth-twitter (1.0.1)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-oauth2 (1.0.8)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.2.0.2)
+      multi_json (>= 1.3.6)
+      rack (>= 1.1)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.0)
@@ -246,6 +271,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_more_seo
   awesome_nested_set
   better_errors
   binding_of_caller
@@ -256,6 +282,7 @@ DEPENDENCIES
   coffee-rails
   devise
   domp
+  fb_graph
   foreman
   geocoder
   gmaps4rails
@@ -272,6 +299,8 @@ DEPENDENCIES
   money-rails
   omniauth
   omniauth-facebook
+  omniauth-linkedin
+  omniauth-twitter
   pg
   quiet_assets
   rails (= 4.1.0)

@@ -2,6 +2,8 @@ Zipifieds::Application.routes.draw do
   
   get "/callback" => "facebook#callback"
   get "/facebook_profile" => "facebook#facebook_profile"
+  
+  match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   get 'ads/myindex'
 

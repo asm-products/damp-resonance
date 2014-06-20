@@ -1,5 +1,8 @@
 
 <div class="authform">
+<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+<%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
+
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
     <h3>Zipifieds Log in</h3>
     <%= devise_error_messages! %>

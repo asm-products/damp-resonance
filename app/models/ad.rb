@@ -1,4 +1,5 @@
 class Ad < ActiveRecord::Base
+  acts_more_seo :title
   belongs_to :user
   belongs_to :category
   validates :title, :category, :description, :price_cents, :presence => true

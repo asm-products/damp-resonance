@@ -1,5 +1,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+require "omniauth-twitter"
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -254,7 +255,10 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth' 
   
+  
   config.omniauth :facebook, "457594381010252", "9c322f063fd6071810e3e95cc9044d18",
      {:scope => 'publish_stream, offline_access, public_profile', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
 
+  
+  config.omniauth :twitter, "mivT2Nz0I5KrU0Efyc2tsHlpS", "ClX1myIdEId0Vok8xlNfZykVD0V8cZSE01tI36bD61zMvBiQQ3"
 end

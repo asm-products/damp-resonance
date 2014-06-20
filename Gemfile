@@ -47,9 +47,13 @@ end
 
 gem "omniauth"
 gem "omniauth-facebook"
+gem "omniauth-twitter"
+gem "omniauth-linkedin"
 #gem "will_paginate"
 gem "kaminari"
 gem "textacular"
 gem "awesome_nested_set"
 #gem 'messaging'
 #gem 'oauth'
+gem 'acts_more_seo'
+gem 'fb_graph'
