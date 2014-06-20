@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
+  TEMP_ZIP = '12345'
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -48,7 +49,7 @@ class User < ActiveRecord::Base
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20],
-          zip: "12345",
+          zip: zip ? zip : "#{TEMP_ZIP}",
           provider: "#{auth.provider}"
         )
         #user.skip_confirmation!
