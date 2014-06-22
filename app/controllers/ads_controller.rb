@@ -45,11 +45,11 @@ class AdsController < ApplicationController
         format.json { render :show, status: :created, location: @ad }
         me = FbGraph::User.me(current_user.token)
          me.feed!(
-         :message => 'Updating via FbGraph',
-         :picture => 'https://graph.facebook.com/matake/picture',
-         :link => 'https://github.com/nov/fb_graph',
-         :name => 'FbGraph',
-         :description => 'A Ruby wrapper for Facebook Graph API'
+         :message => @ad.title,
+         #:picture => 'https://graph.facebook.com/matake/picture',
+         :link => 'http://www.zipifieds.com',
+         :name => 'Zipifieds',
+         :description => @ad.description
          )
       else
         format.html { render :new }
