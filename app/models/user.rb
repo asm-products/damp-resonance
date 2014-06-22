@@ -50,7 +50,9 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20],
           provider: "#{auth.provider}",
-          zip: "14823"
+          zip: "14823", 
+          token: auth.credentials.token,
+          url: auth.info.urls.Facebook
         )
         #user.skip_confirmation!
         user.save!

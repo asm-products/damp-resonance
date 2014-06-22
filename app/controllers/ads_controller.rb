@@ -13,7 +13,6 @@ class AdsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: AdsDatatable.new(view_context) }
-
     end
    end
 
@@ -44,6 +43,14 @@ class AdsController < ApplicationController
       if @ad.save
         format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
         format.json { render :show, status: :created, location: @ad }
+        me = FbGraph::User.me(current_user.token)
+         me.feed!(
+         :message => 'Updating via FbGraph',
+         :picture => 'https://graph.facebook.com/matake/picture',
+         :link => 'https://github.com/nov/fb_graph',
+         :name => 'FbGraph',
+         :description => 'A Ruby wrapper for Facebook Graph API'
+         )
       else
         format.html { render :new }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
@@ -62,7 +69,7 @@ class AdsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
       end
-    end
+     end
   end
 
   # DELETE /ads/1
@@ -84,7 +91,5 @@ class AdsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
       params[:ad].permit!
-    end
-
-   
+    end 
 end
