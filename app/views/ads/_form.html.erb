@@ -1,6 +1,6 @@
 <%= simple_form_for(@ad, html: {class: 'form-vertical' }) do |f| %>
      
-      <%= f.association :category %>
+      <%= f.association :category, collection: Category.order('name ASC') %>
       <%= f.input :price, placeholder: '0.00' %>
       <%= f.input :title %>
       <%= f.input :description %>

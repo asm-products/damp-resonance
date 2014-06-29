@@ -257,7 +257,7 @@ Devise.setup do |config|
   
   
   config.omniauth :facebook, "457594381010252", "9c322f063fd6071810e3e95cc9044d18",
-     {:scope => 'publish_stream, publish_actions, offline_access, public_profile', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
+     {:scope => 'publish_stream, publish_actions, offline_access, public_profile', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}, :auth_type => 'reauthenticate' }
 
   
   config.omniauth :twitter, "mivT2Nz0I5KrU0Efyc2tsHlpS", "ClX1myIdEId0Vok8xlNfZykVD0V8cZSE01tI36bD61zMvBiQQ3"

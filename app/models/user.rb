@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
           provider: "#{auth.provider}",
           zip: "14823", 
           token: auth.credentials.token,
+          expires: Time.at(auth.credentials.expires_at),
           url: auth.info.urls.Facebook
         )
         #user.skip_confirmation!
