@@ -256,7 +256,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth' 
   
   
-  config.omniauth :facebook, "457594381010252", "9c322f063fd6071810e3e95cc9044d18",
+  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"],
      {:scope => 'publish_stream, publish_actions, offline_access, public_profile', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}, :auth_type => 'reauthenticate' }
 
   
