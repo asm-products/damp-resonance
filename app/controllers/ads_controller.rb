@@ -43,7 +43,9 @@ class AdsController < ApplicationController
       if @ad.save
         format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
         format.json { render :show, status: :created, location: @ad }
-        me = FbGraph::User.me(current_user.token)
+        app = FbGraph::Application.new(ENV["FB_APP_ID"], :secret => ENV["FB_APP_SECRET"])
+        fb_access_token = app.get_access_token
+         me = FbGraph::User.me(fb_access_token)
          me.feed!(
          :message => @ad.title,
          #:picture => 'https://graph.facebook.com/matake/picture',
