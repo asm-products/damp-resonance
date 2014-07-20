@@ -1,0 +1,7 @@
+<div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+<% @ads.each do |ad| %>
+  <div class="box col<%= rand(1..5) %>">
+    <p><%= ad.description %></p>
+  </div>
+</div>
+<% end %>

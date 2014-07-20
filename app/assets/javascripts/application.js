@@ -14,6 +14,11 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require dataTables/jquery.dataTables
+//= require masonry/jquery.masonry
+//= require masonry/jquery.event-drag
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min
+//= require masonry/modernizr-transitions
 //= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap

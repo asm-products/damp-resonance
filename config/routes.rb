@@ -6,6 +6,7 @@ Zipifieds::Application.routes.draw do
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   get 'ads/myindex'
+  get 'ads/iscroll'
 
   root :to => "home#index"
   devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}

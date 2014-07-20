@@ -16,4 +16,11 @@
  *= require dataTables/src/demo_table_jui
  *= require dataTables/jquery.dataTables
  *= require_self
- */
+ *= require 'masonry/basic'
+ *= require 'masonry/centered'
+ *= require 'masonry/fluid'
+ *= require 'masonry/gutters'
+ *= require 'masonry/infinitescroll'
+ *= require 'masonry/right-to-left'
+ *= require 'masonry/transitions'
+*/

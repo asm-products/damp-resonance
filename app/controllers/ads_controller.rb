@@ -20,6 +20,12 @@ class AdsController < ApplicationController
     @ads = Ad.where("user_id = ?", current_user.id)
    end
 
+   def iscroll
+    @ads = Ad.all
+   end
+
+
+
   # GET /ads/1
   # GET /ads/1.json
   def show
