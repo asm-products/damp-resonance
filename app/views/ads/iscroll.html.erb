@@ -1,8 +1,11 @@
+
 <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
-<% @ads.each do |ad| %>
-  <div class="box col<%= rand(1..5) %>">
-    <p><%= ad.title %></p>
-    <p><% unless ad.pic_url.nil? %><%= image_tag ad.pic_url %><br /><% end %>
-  </div>
+<% @ads.each do |ad| %> 
+<div class="box col<%= rand(1..5) %>">
+    <p><%= link_to ad.title, ad_path(ad) %></p>
+    <p><% unless ad.pic_url.nil? %><%= image_tag ad.pic_url %><br /><% end %></p>
+    <p><%= ad.description %></p>
+    <p>Location: <%= ad.city + ", " + ad.state + " " + ad.zip %></p>
+   </div>
 </div>
 <% end %>
