@@ -58,3 +58,4 @@ gem "awesome_nested_set"
 gem 'acts_more_seo'
 gem 'fb_graph'
 gem 'masonry-rails'
+gem 'bootswatch-rails'
