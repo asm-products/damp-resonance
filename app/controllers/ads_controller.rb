@@ -49,16 +49,25 @@ class AdsController < ApplicationController
       if @ad.save
         format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
         format.json { render :show, status: :created, location: @ad }
-        #app = FbGraph::Application.new(ENV["FB_APP_ID"], :secret => ENV["FB_APP_SECRET"])
-        # me = FbGraph::User.me(current_user.token).fetch
-        # me.feed!(
-        # :message => @ad.title,
-         #:picture => 'https://graph.facebook.com/matake/picture',
-        # :link => 'http://www.zipifieds.com',
-        # :name => 'Zipifieds',
-        # :description => @ad.description
-        # )
-      else
+        request = Typhoeus::Request.new(
+          "https://post.craigslist.org/bulk-rss/validate",
+           method: :post,
+           body: "this is a request body",
+           params: { field1: "a field" },
+           headers: { Accept: "text/html" }
+           )  
+        request.on_complete do |response|
+          if resonse.success?
+            log("success")
+          elsif response.timed_out?
+            log("got a time out")
+          elsif response.code == 0
+            log(response.return_message)
+          else
+            log("HTTP request failed: " + response.code.to_s)
+          end
+        end  
+          else
         format.html { render :new }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
       end
