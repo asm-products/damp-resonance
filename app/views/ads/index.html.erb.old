@@ -1,0 +1,17 @@
+<table id="ads" class="display" data-source="<%= ads_url(format: "json") %>">
+<thead>
+  <tr>
+    <th>Distance</th>
+    <th>Categories</th>
+    <th>Title</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Date Listed</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>

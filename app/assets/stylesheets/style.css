@@ -1,0 +1,217 @@
+/* ========================= BASE STYLES ========================= */
+
+img {
+	max-width:100%;
+	height:auto;
+	/* This scales down large images on mobile devices */
+}
+.row {
+	max-width:100%;
+}
+body {
+	font-family:"PT Sans", Arial, sans-serif;
+	background-color:#f2f2f2;
+}
+
+/* ========================= UNIVERSAL HEADER ========================= */
+header {
+	background-color:#bfbfbf;
+	padding:10px;
+}
+header button, header input, header span {
+	border-radius:2 !important;
+}
+@media only screen and (max-width: 1235px) {
+	.form-inline input {
+		width:170px !important;
+	}
+}
+@media only screen and (max-width: 1076px) {
+	.form-inline input {
+		width:150px !important;
+		font-size:1em;
+	}
+}
+@media only screen and (max-width: 994px) {
+	.form-inline input {
+		width:100px !important;
+	}
+}
+@media only screen and (max-width: 784px) {
+	.form-inline input {
+		width:90px !important;
+	}
+	header {
+		font-size:0.9em;
+	}
+}
+.btn-success {
+	background-color:#769E30;
+	font-weight:bold;
+	border:#607136;
+	border-width:3px;
+}
+.btn-success:hover, .btn-success:active {
+	background-color:#AED54F;
+}
+header .btn-link {
+	color:#ffffff !important;
+	font-size:1em;
+}
+header .btn-link:hover, header .btn-link:active, header .btn-link:visited {
+	color:#ffffff !important;
+	text-decoration:none;
+}
+header .col-sm-5 {
+	text-align:right;
+}
+.header-mobile {
+	background-color:#bfbfbf;
+	color:#fff;
+	padding:9px;
+	height:50px;
+	position:fixed;
+	width:100%;
+	z-index:2000;
+}
+.header-mobile i {
+	font-size:1.3em;
+}
+.header-mobile .btn-link {
+	color:#fff;
+	text-decoration:none;
+}
+/* ========================= LISTING DETAIL PAGE ========================= */
+.main-content {
+	margin:0 auto;
+	padding:15px;
+}
+.main-content .return-search-link {
+	font-size:1.2em;
+	padding:13px;
+}
+.listing-wrapper {
+	background-color:#fff;
+	border-radius:4px;
+	overflow:hidden;
+}
+.listing-wrapper .listing-inner {
+	padding:20px;
+}
+.listing-wrapper h2 {
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:1.8em;
+}
+.listing-wrapper h4 span {
+	font-size:0.9em;
+	color:#5c5c5c;
+}
+.listing-wrapper .col-sm-4 p {
+	color:#7a7a7a;
+}
+.listing-wrapper .listing-location {
+	color:#C18B59;
+	font-size:1.4em;
+	font-weight:bold;
+}
+.contact-button-wrapper {
+	text-align:right;
+	padding-top:12px;
+}
+.listing-wrapper .col-sm-8 {
+	font-size:1.2em;
+}
+.main-content .listing-ad {
+	background-color:#496184;
+	padding:20px;
+	border-radius:4px;
+	color:#fff;
+}
+/* ========================= ADD/EDIT LISTING PAGE ========================= */
+.listing-editor {
+	background-color:#fff;
+	border-radius:4px;
+	padding:20px;
+}
+.listing-editor .form-group span {
+	color:#ababab;
+	font-style:italic;
+}
+.has-error {
+	color:#a94442 !important;
+}
+.main-content h1, .listings-page h1 {
+	font-size:1.7em;
+}
+/* ========================= SEARCH RESULTS ========================= */
+.listings-page {
+	padding:20px;
+	font-size:0.8em;
+}
+.listings-page .col-sm-4 {
+	text-align:right;
+}
+.listings-page button {
+	font-size:1em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+.listing-tile-view, .listing-list-view {
+	background-color:#fff;
+	border-radius:4px;
+	overflow:hidden;
+}
+.listing-list-view h2 {
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:1.8em;
+}
+.listing-list-view .col-sm-2 {
+	font-size:1.3em;
+	text-align:right;
+	color:#C18B59;
+	font-weight:bold;
+	padding-top:12px;
+}
+.listing-list-view h4 span {
+	font-size:0.9em;
+	color:#5c5c5c;
+}
+.listing-list-view p {
+	color:#7a7a7a;
+}
+/* ========================= MEDIA QUERIES ========================= */
+@media only screen and (max-width: 767px) {
+	/* Mobile */
+	header {
+		display:none;
+	}
+	.main-content .col-sm-3 {
+		padding-top:20px;
+	}
+	.contact-button-wrapper {
+		text-align:left;
+	}
+	.listings-page .col-sm-4, .listings-page .col-sm-8 {
+		text-align:center;
+	}
+	.listings-page .col-sm-4 {
+		padding-bottom:14px;
+	}
+	.listing-list-view {
+		font-size:0.9em !important;
+	}
+	.listing-list-view h4 {
+		font-size:1.2em !important;
+	}
+	.listing-list-view .col-sm-2 {
+		font-size:1.2em;
+	}
+}
+@media only screen and (min-width: 768px) {
+	/* Desktop */
+	.header-mobile {
+		display:none;
+	}
+}

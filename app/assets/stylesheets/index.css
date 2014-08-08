@@ -1,0 +1,65 @@
+/* ========================= HOME PAGE STYLES ========================= */
+body {
+	background-color:#fff;
+}
+.index-hero {
+	padding-top:45px;
+	padding-left:200px;
+	padding-right:200px;
+	background-image:url('../assets/index/hero-bg.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    color:#fff;
+}
+.index-hero h1 {
+	padding-top:40px;
+}
+.index-features {
+	padding:40px;
+	text-align:center;
+}
+.index-features h4 {
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#779b3e;
+}
+.index-listings {
+	padding:40px;
+	background-color:#F2F2F2;
+}
+.index-footer {
+	background-color:#1A1A1A;
+	padding:30px;
+}
+.index-footer a {
+	color:#fff;
+	font-size:1.3em;
+}
+.index-footer span {
+	color:#808080;
+	font-size:1.1em;
+	font-weight:bold;
+	padding-bottom:10px;
+}
+
+@media (max-width:970px) {
+	/* Tablet */
+	.index-hero {
+		padding-top:45px;
+		padding-left:60px;
+		padding-right:60px;
+	}
+	.index-hero img {
+		padding-top:20px;
+	}
+}
+@media (max-width:767px) {
+	/* Mobile */
+	.index-features div {
+		padding-bottom:17px;
+	}
+	.index-hero h1 {
+		padding-top:0px;
+	}
+}
