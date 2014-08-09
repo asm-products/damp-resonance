@@ -86,6 +86,8 @@ GEM
       rack-oauth2 (>= 0.14.4)
       tzinfo
     ffi (1.9.3)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     foreman (0.66.0)
@@ -293,6 +295,7 @@ DEPENDENCIES
   devise
   domp
   fb_graph
+  font-awesome-rails
   foreman
   geocoder
   gmaps4rails
