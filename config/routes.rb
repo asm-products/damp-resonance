@@ -9,7 +9,7 @@ Zipifieds::Application.routes.draw do
   get 'ads/iscroll'
   get 'test/getJobs'
 
-  root :to => "home#index"
+  root :to => "ads#index"
   devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
   resources :users, :ads, :messages, :categories, :conversations, :messages, :facebook
 
